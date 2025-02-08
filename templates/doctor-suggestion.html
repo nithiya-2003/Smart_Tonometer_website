@@ -1,20 +1,137 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Doctor Suggestions - EyeCare Monitor</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
-</head>
-<body>
-  <div class="navbar">
-    <a href="{{ url_for('dashboard') }}">Home</a>
-    <a href="{{ url_for('records') }}">Previous Records</a>
-    <a href="{{ url_for('doctor') }}">Doctor Suggestions</a>
-  </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Doctor Suggestions - EyeCare Monitor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/lucide-icons/dist/umd/lucide.css" rel="stylesheet">
+    <style>
+      .animated-gradient {
+        background: linear-gradient(-45deg, #6366f1, #818cf8, #4f46e5, #4338ca);
+        background-size: 400% 400%;
+        animation: gradient 15s ease infinite;
+      }
+      @keyframes gradient {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+      .glass-card {
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+    </style>
+  </head>
+  <body class="animated-gradient min-h-screen">
+    <!-- Navigation -->
+    <nav class="glass-card shadow-lg">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+          <div class="flex items-center">
+            <div class="flex-shrink-0">
+              <i class="lucide-eye text-indigo-600 h-8 w-8"></i>
+            </div>
+            <div class="hidden md:block">
+              <div class="ml-10 flex items-baseline space-x-4">
+                <a href="/dashboard" class="text-gray-700 hover:bg-indigo-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200">Dashboard</a>
+                <a href="/records" class="text-gray-700 hover:bg-indigo-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200">Records</a>
+                <a href="/doctor" class="bg-indigo-600 text-white px-3 py-2 rounded-md text-sm font-medium">Doctor</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
 
-  <h2>Nearby Eye Specialists</h2>
-  <p>Click the link below to find eye specialists near you:</p>
-  <a href="https://www.google.com/maps/search/eye+specialist+near+me" target="_blank">Find Eye Specialists on Google Maps</a>
-</body>
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div class="glass-card rounded-2xl shadow-xl p-8 mb-8">
+        <div class="flex items-center mb-6">
+          <i class="lucide-stethoscope text-indigo-600 h-8 w-8 mr-3"></i>
+          <h2 class="text-2xl font-bold text-gray-800">Find Eye Specialists Near You</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <!-- Map Section -->
+          <div class="glass-card rounded-xl p-6">
+            <div class="aspect-w-16 aspect-h-9 mb-4">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d15000!2d-122.4194!3d37.7749!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sus!4v1519162875655"
+                width="100%"
+                height="300"
+                style="border:0; border-radius: 0.75rem;"
+                allowfullscreen=""
+                loading="lazy"
+              ></iframe>
+            </div>
+            <a
+              href="https://www.google.com/maps/search/eye+specialist+near+me"
+              target="_blank"
+              class="inline-flex items-center px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors duration-200"
+            >
+              <i class="lucide-map-pin h-5 w-5 mr-2"></i>
+              Open in Google Maps
+            </a>
+          </div>
+
+          <!-- Featured Doctors -->
+          <div class="space-y-4">
+            <div class="glass-card rounded-xl p-4 hover:shadow-lg transition-shadow duration-200">
+              <div class="flex items-center">
+                <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=100&h=100" class="w-16 h-16 rounded-full object-cover" alt="Doctor" />
+                <div class="ml-4">
+                  <h3 class="font-semibold text-gray-800">Dr. Sarah Johnson</h3>
+                  <p class="text-sm text-gray-600">Ophthalmologist</p>
+                  <div class="flex items-center mt-1">
+                    <i class="lucide-star-half text-yellow-400 h-4 w-4"></i>
+                    <span class="text-sm text-gray-600 ml-1">4.8 (120 reviews)</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="glass-card rounded-xl p-4 hover:shadow-lg transition-shadow duration-200">
+              <div class="flex items-center">
+                <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=100&h=100" class="w-16 h-16 rounded-full object-cover" alt="Doctor" />
+                <div class="ml-4">
+                  <h3 class="font-semibold text-gray-800">Dr. Michael Chen</h3>
+                  <p class="text-sm text-gray-600">Glaucoma Specialist</p>
+                  <div class="flex items-center mt-1">
+                    <i class="lucide-star-half text-yellow-400 h-4 w-4"></i>
+                    <span class="text-sm text-gray-600 ml-1">4.9 (95 reviews)</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Additional Resources -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="glass-card rounded-xl p-6 hover:shadow-lg transition-shadow duration-200">
+          <i class="lucide-phone-call text-indigo-600 h-8 w-8 mb-4"></i>
+          <h3 class="text-lg font-semibold text-gray-800 mb-2">Emergency Contact</h3>
+          <p class="text-gray-600 mb-4">24/7 eye care emergency hotline available</p>
+          <a href="tel:+1234567890" class="text-indigo-600 hover:text-indigo-700 font-medium">+1 (234) 567-890</a>
+        </div>
+
+        <div class="glass-card rounded-xl p-6 hover:shadow-lg transition-shadow duration-200">
+          <i class="lucide-calendar text-indigo-600 h-8 w-8 mb-4"></i>
+          <h3 class="text-lg font-semibold text-gray-800 mb-2">Book Appointment</h3>
+          <p class="text-gray-600 mb-4">Schedule a consultation with our specialists</p>
+          <button class="text-indigo-600 hover:text-indigo-700 font-medium">Book Now</button>
+        </div>
+
+        <div class="glass-card rounded-xl p-6 hover:shadow-lg transition-shadow duration-200">
+          <i class="lucide-file-text text-indigo-600 h-8 w-8 mb-4"></i>
+          <h3 class="text-lg font-semibold text-gray-800 mb-2">Health Resources</h3>
+          <p class="text-gray-600 mb-4">Access educational materials about eye health</p>
+          <button class="text-indigo-600 hover:text-indigo-700 font-medium">Learn More</button>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
