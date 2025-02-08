@@ -11,6 +11,9 @@ def home():
 def dashboard():
     return render_template('dashboard.html')
 
+@app.route("/login", methods=['GET', 'POST'])
+def login():
+    return render_template('login.html')
 @app.route("/previous-records")
 def records():
     return render_template('previous-records.html')
