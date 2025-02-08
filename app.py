@@ -1,26 +1,31 @@
+import os
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import Column, Integer, String, DateTime, func
 
-from flask import Flask, render_template, request
+DATABASE_URL = os.environ['MY_SECRET']
+engine = create_engine(DATABASE_URL)
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
-app = Flask(__name__)
+Base = declarative_base()
 
-@app.route("/")
-def home():
-    return render_template('home.html')
+class User(Base):
+    __tablename__ = "users"
+    id = Column(Integer, primary_key=True, index=True)
+    username = Column(String, nullable=False)
+    email = Column(String, unique=True, nullable=False)
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
 
-@app.route("/dashboard", methods=['GET', 'POST'])
-def dashboard():
-    return render_template('dashboard.html')
-
-@app.route("/login", methods=['GET', 'POST'])
-def login():
-    return render_template('login.html')
-@app.route("/previous-records")
-def records():
-    return render_template('previous-records.html')
-
-@app.route("/doctor-suggestions")
-def doctor():
-    return render_template('doctor-suggestion.html')
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=3000, debug=True)
+    with get_db() as db:
+        users = db.query(User).all()
+        for user in users:
+            print(f"ID: {user.id}, Username: {user.username}, Email: {user.email}, Created At: {user.created_at}")
