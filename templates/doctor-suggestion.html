@@ -8,9 +8,9 @@
 </head>
 <body>
   <div class="navbar">
-    <a href="dashboard.html">Home</a>
-    <a href="previous-records.html">Previous Records</a>
-    <a href="doctor-suggestions.html">Doctor Suggestions</a>
+    <a href="{{ url_for('dashboard') }}">Home</a>
+    <a href="{{ url_for('records') }}">Previous Records</a>
+    <a href="{{ url_for('doctor') }}">Doctor Suggestions</a>
   </div>
 
   <h2>Nearby Eye Specialists</h2>
