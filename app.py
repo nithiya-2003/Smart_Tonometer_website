@@ -18,9 +18,10 @@ def login():
 def records():
     return render_template('previous-records.html')
 
-@app.route("/doctor-suggestions")
+@app.route('/doctor-suggestions', methods=['GET', 'POST'])
 def doctor():
-    return render_template('doctor-suggestion.html')
+  # Add your logic here to handle the doctor route
+  return render_template('doctor-suggestion.html')
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=3000, debug=True)
