@@ -3,5 +3,12 @@
     "autoprefixer": "^10.4.20",
     "postcss": "^8.5.1",
     "tailwindcss": "^4.0.4"
+  },
+  "dependencies": {
+    "@supabase/realtime-js": "^2.11.3",
+    "@supabase/supabase-js": "^2.48.1",
+    "@trigger.dev/supabase": "^3.3.12",
+    "pg": "^8.13.1",
+    "supabase-swr": "^1.0.0-alpha.4"
   }
 }
