@@ -6,19 +6,13 @@
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <title>EyeCare Monitor - Login</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://unpkg.com/lucide-icons/dist/umd/lucide.css" rel="stylesheet">
     <style>
       .animated-gradient {
         background: linear-gradient(-45deg, #6366f1, #818cf8, #4f46e5, #4338ca);
         background-size: 400% 400%;
         animation: gradient 15s ease infinite;
       }
-      @media (max-width: 640px) {
-  .p-8 {
-    padding: 2rem;
-  }
-}
-
       @keyframes gradient {
         0% { background-position: 0% 50%; }
         50% { background-position: 100% 50%; }
@@ -32,8 +26,7 @@
         <!-- Header -->
         <div class="text-center">
           <div class="mx-auto h-16 w-16 bg-gradient-to-tr from-indigo-600 to-purple-600 rounded-full flex items-center justify-center shadow-lg transform hover:scale-105 transition-transform duration-300">
-            <img src="static/favicon.svg" alt="Logo" class="h-8 w-15 mx-auto">
-
+            <i class="lucide-shield h-8 w-8 text-white"></i>
           </div>
           <h2 class="mt-6 text-3xl font-extrabold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
             Welcome Back
@@ -44,9 +37,7 @@
         </div>
 
         <!-- Form -->
-        <form class="mt-8 space-y-6" action="/login" method="POST">
-
-          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <form class="mt-8 space-y-6" action="/dashboard" method="POST">
           <div class="space-y-4">
             <div>
               <label for="email" class="block text-sm font-medium text-gray-700">
@@ -145,5 +136,7 @@
         }
       }
     </script>
+   
+
   </body>
 </html>

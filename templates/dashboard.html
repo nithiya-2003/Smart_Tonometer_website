@@ -44,7 +44,7 @@
         </nav>
       </div>
     </div>
-    
+
     <!-- Navigation -->
     <nav class="glass-card shadow-lg">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -111,15 +111,18 @@
           <div class="flex items-center justify-center py-6">
             <div class="text-center">
               <div class="text-5xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
-                22 mmHg
+                {{ latest_iop }} mmHg
               </div>
               <p class="mt-2 text-gray-600">Last updated: Just now</p>
             </div>
           </div>
           <div class="mt-4 flex justify-center">
+            <form method="POST" action="{{ url_for('take_new_reading') }}">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
             <button class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors duration-200">
               Take New Reading
             </button>
+            </form>
           </div>
         </div>
 
@@ -132,15 +135,15 @@
           <div class="space-y-4">
             <div class="flex items-center justify-between">
               <span class="text-gray-600">Average Reading</span>
-              <span class="font-semibold text-gray-800">21.5 mmHg</span>
+              <span class="font-semibold text-gray-800">{{ avg_reading }} mmHg</span>
             </div>
             <div class="flex items-center justify-between">
               <span class="text-gray-600">Highest Reading</span>
-              <span class="font-semibold text-gray-800">24 mmHg</span>
+              <span class="font-semibold text-gray-800">{{ max_reading }} mmHg</span>
             </div>
             <div class="flex items-center justify-between">
               <span class="text-gray-600">Lowest Reading</span>
-              <span class="font-semibold text-gray-800">19 mmHg</span>
+              <span class="font-semibold text-gray-800">{{ min_reading }} mmHg</span>
             </div>
           </div>
         </div>
@@ -155,21 +158,40 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div class="p-4 bg-indigo-50 rounded-lg">
             <i class="lucide-droplets text-indigo-600 h-8 w-8 mb-2"></i>
-            <h4 class="font-semibold text-gray-800">Use Eye Drops</h4>
+            <h4 class="text-1xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">Use Eye Drops</h4>
             <p class="text-sm text-gray-600">Remember to apply prescribed eye drops every 6 hours</p>
           </div>
           <div class="p-4 bg-indigo-50 rounded-lg">
             <i class="lucide-clock text-indigo-600 h-8 w-8 mb-2"></i>
-            <h4 class="font-semibold text-gray-800">Take Breaks</h4>
+            <h4 class="text-1xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">Take Breaks</h4>
             <p class="text-sm text-gray-600">Follow the 20-20-20 rule while working</p>
           </div>
           <div class="p-4 bg-indigo-50 rounded-lg">
             <i class="lucide-calendar text-indigo-600 h-8 w-8 mb-2"></i>
-            <h4 class="font-semibold text-gray-800">Next Checkup</h4>
+            <h4 class="text-1xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">Next Checkup</h4>
             <p class="text-sm text-gray-600">Schedule your next doctor visit in 2 weeks</p>
           </div>
         </div>
       </div>
     </div>
+
+    <script>
+      document.querySelector('button').addEventListener('click', function(event) {
+          event.preventDefault();
+
+          fetch('/take_new_reading', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'X-CSRFToken': '{{ csrf_token() }}', 
+              },
+          })
+          .then(response => response.text())
+          .then(html => {
+              document.querySelector('.dashboard-content').innerHTML = html;
+          });
+      });
+   </script>
+
   </body>
 </html>
