@@ -6,6 +6,7 @@
     <title>Previous Records - EyeCare Monitor</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://unpkg.com/lucide-icons/dist/umd/lucide.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     <style>
       .animated-gradient {
         background: linear-gradient(-45deg, #6366f1, #818cf8, #4f46e5, #4338ca);
@@ -30,8 +31,10 @@
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-16">
           <div class="flex items-center">
-            <div class="flex-shrink-0">
-              <i class="lucide-eye text-indigo-600 h-8 w-8"></i>
+            <div class="md:hidden ml-3">
+              <button onclick="toggleMobileMenu()" class="inline-flex items-center justify-center p-2 rounded-md text-indigo-600 hover:text-indigo-700 focus:outline-none">
+                <i id="menu-icon" class="bi bi-list h-6 w-6"></i> <!-- Bootstrap Icon -->
+              </button>
             </div>
             <div class="hidden md:block">
               <div class="ml-10 flex items-baseline space-x-4">
