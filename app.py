@@ -247,7 +247,7 @@ def records():
                            prev_page=prev_page,
                            date_filter=date_filter)
 
-@app.route("/doctor")
+@app.route("/doctor-sugesstions")
 def doctor():
     return render_template('doctor-suggestion.html')
 
