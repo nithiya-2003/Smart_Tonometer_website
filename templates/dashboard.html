@@ -80,6 +80,22 @@
         </div>
       </div>
     </nav>
+    <script>
+      function toggleMobileMenu() {
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+        mobileMenu.classList.toggle('hidden');
+
+        if (mobileMenu.classList.contains('hidden')) {
+          menuIcon.classList.remove('lucide-x');
+          menuIcon.classList.add('lucide-menu');
+        } else {
+          menuIcon.classList.remove('lucide-menu');
+          menuIcon.classList.add('lucide-x');
+        }
+      }
+    </script>
+
 
     <!-- Main Content -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
